@@ -138,11 +138,18 @@ h3.display, .h3{
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
+.site-header::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: saturate(140%) blur(10px);
+}
 .site-header .wrap{
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
