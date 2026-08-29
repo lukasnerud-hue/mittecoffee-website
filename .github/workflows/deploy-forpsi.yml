@@ -1,0 +1,51 @@
+# Automatický deploy webu na Forpsi hosting přes FTPS (FTP s TLS).
+#
+# Spouští se při každém pushnutí do větve `main`. Nahraje aktuální obsah
+# tohoto repozitáře (= složka website/) do adresáře `www` na serveru
+# ftpx.forpsi.com.
+#
+# PŘED PRVNÍM POUŽITÍM je potřeba v repozitáři nastavit tato Repository
+# secrets (GitHub → Settings → Secrets and variables → Actions → New
+# repository secret):
+#
+#   FTP_SERVER    = ftpx.forpsi.com
+#   FTP_USERNAME  = www.mitte.cz
+#   FTP_PASSWORD  = <heslo k FTP účtu>
+#
+# Dokud tyto secrets nejsou nastavené, workflow po spuštění selže hned na
+# kroku přihlášení – nic se nenahraje ani nesmaže.
+#
+# `dangerous-clean-slate` je záměrně `false`, aby se před nahráním
+# nesmazal obsah cílové složky na serveru – nahrávají/aktualizují se jen
+# soubory, které se změnily.
+
+name: Deploy to Forpsi (FTPS)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  ftp-deploy:
+    name: FTP Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Forpsi via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./
+          server-dir: /www/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
