@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://mitte.cz/</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/index.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/" />
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/menu.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/menu.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/menu.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/menu.html" />
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/apartments.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/apartments.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/apartments.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/apartments.html" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/gallery.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/gallery.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/gallery.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/gallery.html" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/contacts.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/contacts.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/contacts.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/contacts.html" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/index.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/en/menu.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/menu.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/menu.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/menu.html" />
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/en/apartments.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/apartments.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/apartments.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/apartments.html" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/en/gallery.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/gallery.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/gallery.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/gallery.html" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mitte.cz/en/contacts.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://mitte.cz/contacts.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mitte.cz/en/contacts.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mitte.cz/contacts.html" />
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+</urlset>
