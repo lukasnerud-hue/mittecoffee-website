@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mitte.cz/sitemap.xml
+Sitemap: https://www.mitte.cz/sitemap.xml
