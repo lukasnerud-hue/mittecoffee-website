@@ -510,6 +510,19 @@ section{ padding: clamp(64px, 9vw, 120px) 0; }
 }
 .menu-tabs button + button{ border-left: 1px solid var(--ink); }
 .menu-tabs button[aria-selected="true"]{ background: var(--ink); color: #fff; }
+.menu-tabs--primary{ border-width: 2px; }
+.menu-tabs--primary button{ padding: 16px 34px; font-size: 14px; }
+.menu-tabs--primary button[aria-selected="true"]{ background: var(--red); border-color: var(--red); }
+.menu-tabs--primary button + button{ border-left: 2px solid var(--ink); }
+
+.tab-label{
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 
 .menu-season{ display: none; }
 .menu-season.is-active{ display: block; }

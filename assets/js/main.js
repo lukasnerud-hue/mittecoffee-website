@@ -36,23 +36,25 @@
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
-  /* Menu season tabs */
-  var tabs = document.querySelectorAll(".menu-tabs button");
-  if (tabs.length) {
+  /* Menu tabs (location + season) — each .menu-tabs group is scoped by data-group,
+     so switching one group (e.g. location) never touches another group's tabs/panels. */
+  document.querySelectorAll(".menu-tabs[data-group]").forEach(function (tabGroup) {
+    var groupName = tabGroup.dataset.group;
+    var tabs = tabGroup.querySelectorAll("button");
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
         tabs.forEach(function (t) { t.setAttribute("aria-selected", "false"); });
         tab.setAttribute("aria-selected", "true");
-        document.querySelectorAll(".menu-season").forEach(function (s) {
+        document.querySelectorAll('.menu-season[data-group="' + groupName + '"]').forEach(function (s) {
           s.classList.toggle("is-active", s.id === tab.dataset.target);
         });
         var cats = document.getElementById("cats-" + tab.dataset.target);
-        document.querySelectorAll(".menu-cats").forEach(function (c) {
+        document.querySelectorAll('.menu-cats[data-group="' + groupName + '"]').forEach(function (c) {
           c.hidden = c !== cats;
         });
       });
     });
-  }
+  });
 
   /* Gallery filter */
   var filterBtns = document.querySelectorAll(".gallery-filters button");
