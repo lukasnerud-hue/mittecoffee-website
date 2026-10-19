@@ -354,7 +354,7 @@ section{ padding: clamp(64px, 9vw, 120px) 0; }
 .loc-card::before{
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(8,6,5,0) 0%, rgba(8,6,5,.22) 28%, rgba(8,6,5,.9) 48%, rgba(8,6,5,.99) 100%);
+  background: linear-gradient(180deg, rgba(18,15,14,.4) 0%, rgba(18,15,14,.42) 40%, rgba(18,15,14,.9) 100%);
 }
 .loc-card .tag, .loc-card h3, .loc-card .addr, .loc-card .go{
   text-shadow: 0 1px 12px rgba(0,0,0,.55);
