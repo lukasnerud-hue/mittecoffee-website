@@ -245,8 +245,11 @@ h3.display, .h3{
   background: linear-gradient(180deg, rgba(18,15,14,.4) 0%, rgba(18,15,14,.42) 40%, rgba(18,15,14,.9) 100%);
   z-index: 1;
 }
-.hero-inner .eyebrow, .hero-inner h1, .hero-inner .lede{
+.hero-inner .eyebrow, .hero-inner h1{
   text-shadow: 0 1px 16px rgba(0,0,0,.4);
+}
+.hero-inner .lede{
+  text-shadow: 0 1px 4px rgba(0,0,0,.6);
 }
 .hero-inner{
   position: relative;
