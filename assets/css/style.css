@@ -19,7 +19,7 @@
   --line: #E7DFD3;
   --muted: #8A8078;
 
-  --font: 'Gill Sans MT', 'Gill Sans', Corbel, Calibri, 'Trebuchet MS', sans-serif;
+  --font: 'Jost', 'Gill Sans MT', 'Gill Sans', Corbel, Calibri, 'Trebuchet MS', sans-serif;
 
   --wrap: 1240px;
   --gutter: clamp(20px, 5vw, 64px);
