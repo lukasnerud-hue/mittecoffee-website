@@ -895,3 +895,18 @@ section{ padding: clamp(64px, 9vw, 120px) 0; }
 /* fade-up reveal */
 [data-reveal]{ opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 [data-reveal].is-visible{ opacity: 1; transform: translateY(0); }
+
+/* ------------------------------------ věrnostní program (club.html) ---------- */
+.club-stats{ margin-top: 44px; }
+.club-steps{ list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.club-steps li{ border-top: 2px solid var(--ink); padding-top: 22px; }
+.club-steps h3{ margin-top: 14px; }
+.club-steps p{ margin-top: 10px; }
+.club-step-num{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; background: var(--red); color: #fff;
+  font-weight: 700; font-size: 20px;
+}
+.club-note{ margin-top: 36px; font-size: 15px; }
+.club-register a{ color: var(--red); }
+#mitte-club iframe{ width: 100%; border: 0; display: block; }
