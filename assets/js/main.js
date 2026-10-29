@@ -124,4 +124,160 @@
   /* Footer year */
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
+
+  /* ---------------------------------------------------------------------
+     E-shop: cart + checkout (client-side demo — no real payment/shipping
+     yet, order "submission" just shows a confirmation summary).
+  --------------------------------------------------------------------- */
+  var productGrid = document.querySelector(".product-grid");
+  if (productGrid) {
+    var CART_KEY = "mitte-cart";
+    var money = function (n) { return n.toLocaleString("cs-CZ") + " Kč"; };
+
+    function loadCart() {
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch (e) { return []; }
+    }
+    function saveCart(cart) {
+      try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+    }
+
+    var cartBody = document.querySelector("[data-cart-body]");
+    var cartEmpty = document.querySelector("[data-cart-empty]");
+    var cartTable = document.querySelector("[data-cart-table]");
+    var cartCountEls = document.querySelectorAll("[data-cart-count]");
+    var subtotalEl = document.querySelector("[data-cart-subtotal]");
+    var deliveryEl = document.querySelector("[data-cart-delivery]");
+    var totalEl = document.querySelector("[data-cart-total]");
+    var deliveryInputs = document.querySelectorAll('input[name="delivery"]');
+    var checkoutForm = document.querySelector("[data-checkout-form]");
+    var orderConfirm = document.querySelector("[data-order-confirm]");
+    var confirmSummary = document.querySelector("[data-confirm-summary]");
+    var pickupField = document.querySelector("[data-pickup-field]");
+
+    function selectedDeliveryPrice() {
+      var checked = document.querySelector('input[name="delivery"]:checked');
+      return checked ? parseFloat(checked.dataset.price) : 0;
+    }
+
+    function render() {
+      var cart = loadCart();
+      var count = cart.reduce(function (sum, i) { return sum + i.qty; }, 0);
+      cartCountEls.forEach(function (el) { el.textContent = count; });
+
+      if (!cartBody) return;
+      cartBody.innerHTML = "";
+      if (cart.length === 0) {
+        if (cartEmpty) cartEmpty.style.display = "block";
+        if (cartTable) cartTable.style.display = "none";
+      } else {
+        if (cartEmpty) cartEmpty.style.display = "none";
+        if (cartTable) cartTable.style.display = "table";
+        cart.forEach(function (item) {
+          var tr = document.createElement("tr");
+          tr.innerHTML =
+            '<td><div class="cart-name">' + item.name + '</div><div class="cart-origin">' + item.origin + '</div></td>' +
+            '<td><div class="qty-stepper">' +
+              '<button type="button" data-qty-minus="' + item.id + '" aria-label="Snížit množství">−</button>' +
+              '<span>' + item.qty + '</span>' +
+              '<button type="button" data-qty-plus="' + item.id + '" aria-label="Zvýšit množství">+</button>' +
+            '</div></td>' +
+            '<td class="cart-linetotal">' + money(item.price * item.qty) + '</td>' +
+            '<td><button type="button" class="cart-remove" data-remove="' + item.id + '">Odebrat</button></td>';
+          cartBody.appendChild(tr);
+        });
+      }
+
+      var subtotal = cart.reduce(function (sum, i) { return sum + i.price * i.qty; }, 0);
+      var delivery = cart.length ? selectedDeliveryPrice() : 0;
+      if (subtotalEl) subtotalEl.textContent = money(subtotal);
+      if (deliveryEl) deliveryEl.textContent = cart.length ? money(delivery) : "—";
+      if (totalEl) totalEl.textContent = money(subtotal + delivery);
+    }
+
+    productGrid.querySelectorAll(".add-to-cart").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = btn.closest(".product-card");
+        var id = card.dataset.id;
+        var cart = loadCart();
+        var existing = cart.find(function (i) { return i.id === id; });
+        if (existing) { existing.qty += 1; }
+        else {
+          cart.push({
+            id: id,
+            name: card.dataset.name,
+            origin: card.dataset.origin,
+            price: parseFloat(card.dataset.price),
+            qty: 1
+          });
+        }
+        saveCart(cart);
+        render();
+        btn.dataset.added = "true";
+        var original = btn.textContent;
+        btn.textContent = "Přidáno ✓";
+        setTimeout(function () { btn.dataset.added = "false"; btn.textContent = original; }, 1200);
+      });
+    });
+
+    if (cartBody) {
+      cartBody.addEventListener("click", function (e) {
+        var cart = loadCart();
+        var plusId = e.target.getAttribute("data-qty-plus");
+        var minusId = e.target.getAttribute("data-qty-minus");
+        var removeId = e.target.getAttribute("data-remove");
+        if (plusId) {
+          var pi = cart.find(function (i) { return i.id === plusId; });
+          if (pi) pi.qty += 1;
+        } else if (minusId) {
+          var mi = cart.find(function (i) { return i.id === minusId; });
+          if (mi) { mi.qty -= 1; if (mi.qty <= 0) cart = cart.filter(function (i) { return i.id !== minusId; }); }
+        } else if (removeId) {
+          cart = cart.filter(function (i) { return i.id !== removeId; });
+        } else {
+          return;
+        }
+        saveCart(cart);
+        render();
+      });
+    }
+
+    deliveryInputs.forEach(function (input) {
+      input.addEventListener("change", function () {
+        if (pickupField) pickupField.classList.toggle("hidden", input.value !== "zasilkovna");
+        render();
+      });
+    });
+
+    if (checkoutForm) {
+      checkoutForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var cart = loadCart();
+        if (cart.length === 0) { return; }
+        var delivery = document.querySelector('input[name="delivery"]:checked');
+        var name = checkoutForm.querySelector('[name="customer-name"]').value;
+        var email = checkoutForm.querySelector('[name="customer-email"]').value;
+        var subtotal = cart.reduce(function (sum, i) { return sum + i.price * i.qty; }, 0);
+        var deliveryPrice = delivery ? parseFloat(delivery.dataset.price) : 0;
+
+        if (confirmSummary) {
+          var lines = cart.map(function (i) { return i.qty + '× ' + i.name + ' — ' + money(i.price * i.qty); }).join("<br>");
+          confirmSummary.innerHTML =
+            '<p><strong>Jméno:</strong> ' + name + '<br><strong>E-mail:</strong> ' + email + '</p>' +
+            '<p style="margin-top:12px;">' + lines + '</p>' +
+            '<p style="margin-top:12px;"><strong>Doprava:</strong> ' + (delivery ? delivery.closest(".delivery-option").querySelector(".dname").textContent : "—") + '</p>' +
+            '<p style="margin-top:12px; font-weight:700;">Celkem: ' + money(subtotal + deliveryPrice) + '</p>';
+        }
+        if (orderConfirm) {
+          orderConfirm.classList.add("is-visible");
+          orderConfirm.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        checkoutForm.reset();
+        saveCart([]);
+        render();
+      });
+    }
+
+    render();
+  }
 })();
